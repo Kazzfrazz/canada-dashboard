@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-02T02:30:30+00:00",
+  "generatedAt": "2026-09-02T02:33:20+00:00",
   "canada": {
     "population": 41417056,
     "populationDate": "2026-04-01",
@@ -58,9 +58,9 @@
   "cmas": {
     "referenceYear": 2025,
     "previousYear": 2024,
-    "totalPopulation": 29843312,
-    "annualGrowthPct": 0.929,
-    "sharePct": 71.65,
+    "totalPopulation": 31169100,
+    "annualGrowthPct": 1.002,
+    "sharePct": 74.833,
     "count": 41,
     "top10": [
       {
@@ -93,45 +93,45 @@
       },
       {
         "rank": 5,
+        "name": "Ottawa–Gatineau",
+        "population": 1700014,
+        "previousPopulation": 1661966,
+        "annualGrowthPct": 2.289
+      },
+      {
+        "rank": 6,
         "name": "Edmonton",
         "population": 1692385,
         "previousPopulation": 1641668,
         "annualGrowthPct": 3.089
       },
       {
-        "rank": 6,
+        "rank": 7,
         "name": "Winnipeg",
         "population": 951758,
         "previousPopulation": 940010,
         "annualGrowthPct": 1.25
       },
       {
-        "rank": 7,
+        "rank": 8,
         "name": "Québec",
         "population": 903607,
         "previousPopulation": 894691,
         "annualGrowthPct": 0.997
       },
       {
-        "rank": 8,
+        "rank": 9,
         "name": "Hamilton",
         "population": 871143,
         "previousPopulation": 862679,
         "annualGrowthPct": 0.981
       },
       {
-        "rank": 9,
+        "rank": 10,
         "name": "Kitchener–Cambridge–Waterloo",
         "population": 701568,
         "previousPopulation": 699402,
         "annualGrowthPct": 0.31
-      },
-      {
-        "rank": 10,
-        "name": "London",
-        "population": 633002,
-        "previousPopulation": 626875,
-        "annualGrowthPct": 0.977
       }
     ]
   },
