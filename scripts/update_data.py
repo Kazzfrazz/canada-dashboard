@@ -88,6 +88,8 @@ def full_table_rows(product_id: str):
 
 
 def canonical_cma_name(geo: str) -> str:
+    # Full CMA rows can carry province text after the CMA label. Remove that
+    # descriptive suffix while preserving the actual CMA name.
     name = re.split(r"\s*\(CMA\)", geo, maxsplit=1)[0].strip()
     name = re.sub(r"\s+-\s+", "–", name)
     aliases = {
@@ -117,6 +119,15 @@ def is_total_age(value: str) -> bool:
     return v in {"all ages", "total - age", "total age"} or v.startswith("all ages")
 
 
+def is_full_cma(row) -> bool:
+    # Statistics Canada's 2021 DGUID geography prefix for a census metropolitan
+    # area is S0503. This matters for cross-provincial CMAs such as
+    # Ottawa–Gatineau, which also have separate provincial-part records in the
+    # source table. Filtering the DGUID avoids accidentally keeping one part.
+    dguid = (row.get("DGUID") or "").strip()
+    return bool(re.fullmatch(r"2021S0503\d{3}", dguid))
+
+
 def cma_data(canada_points):
     rows = full_table_rows("17100148")
     if not rows:
@@ -132,8 +143,7 @@ def cma_data(canada_points):
     latest_year, prior_year = years[-1], years[-2]
 
     def eligible(row):
-        geo = row.get("GEO", "")
-        if "(CMA)" not in geo:
+        if not is_full_cma(row):
             return False
         if gender_col and not is_total_gender(row.get(gender_col, "")):
             return False
@@ -161,9 +171,13 @@ def cma_data(canada_points):
         gender_values = sorted({r.get(gender_col, "") for r in rows})[:20] if gender_col else []
         age_values = sorted({r.get(age_col, "") for r in rows})[:20] if age_col else []
         raise RuntimeError(
-            f"Only found {len(latest)} CMAs for {latest_year}. "
+            f"Only found {len(latest)} full CMAs for {latest_year}. "
             f"Gender column={gender_col!r} sample={gender_values!r}; "
             f"age column={age_col!r} sample={age_values!r}"
+        )
+    if "Ottawa–Gatineau" not in latest:
+        raise RuntimeError(
+            "Ottawa–Gatineau full-CMA record is missing; refusing to publish a partial CMA dataset"
         )
 
     total_latest = sum(latest.values())
@@ -216,11 +230,19 @@ def policy_rate():
 def validate(payload):
     if payload["canada"]["population"] < 30_000_000:
         raise RuntimeError("Canada population validation failed")
-    if payload["cmas"]["count"] < 35:
+    cmas = payload["cmas"]
+    if cmas["count"] < 35:
         raise RuntimeError("CMA count validation failed")
-    if len(payload["cmas"]["top10"]) != 10:
+    if cmas["totalPopulation"] < 30_000_000:
+        raise RuntimeError("CMA population total is implausibly low")
+    if cmas["sharePct"] is None or not 70 <= cmas["sharePct"] <= 80:
+        raise RuntimeError("CMA share of Canada population failed validation")
+    if len(cmas["top10"]) != 10:
         raise RuntimeError("Top-10 CMA validation failed")
-    if payload["cmas"]["top10"][0]["population"] < 1_000_000:
+    top_names = {row["name"] for row in cmas["top10"]}
+    if "Ottawa–Gatineau" not in top_names:
+        raise RuntimeError("Ottawa–Gatineau missing from top-10 CMA data")
+    if cmas["top10"][0]["population"] < 1_000_000:
         raise RuntimeError("Largest CMA validation failed")
     if not 0 <= payload["economy"]["policyRate"] <= 20:
         raise RuntimeError("Policy rate validation failed")
@@ -253,7 +275,10 @@ def main():
         "populationDate": payload["canada"]["populationDate"],
         "cmaYear": payload["cmas"]["referenceYear"],
         "cmaCount": payload["cmas"]["count"],
+        "cmaTotal": payload["cmas"]["totalPopulation"],
+        "cmaShare": payload["cmas"]["sharePct"],
         "largestCMA": payload["cmas"]["top10"][0],
+        "ottawa": next(row for row in payload["cmas"]["top10"] if row["name"] == "Ottawa–Gatineau"),
         "policyRate": payload["economy"]["policyRate"],
     }, indent=2, ensure_ascii=False))
 
