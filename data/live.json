@@ -1,0 +1,25 @@
+{
+  "generatedAt": "2026-09-02T02:30:00Z",
+  "canada": {
+    "population": 41417056,
+    "populationDate": "2026-04-01",
+    "quarterlyGrowthPct": -0.13
+  },
+  "cmas": {
+    "referenceYear": 2025,
+    "totalPopulation": 31169100,
+    "annualGrowthPct": 1.0,
+    "sharePct": 74.8,
+    "count": 41,
+    "top10": []
+  },
+  "economy": {
+    "policyRate": 2.25,
+    "policyRateDate": "2026-07-15"
+  },
+  "sources": {
+    "canadaPopulation": "Statistics Canada table 17-10-0009-01",
+    "cmaPopulation": "Statistics Canada table 17-10-0148-01",
+    "policyRate": "Bank of Canada Valet V39079"
+  }
+}
