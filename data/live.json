@@ -1,57 +1,57 @@
 {
-  "generatedAt": "2026-09-22T13:29:39+00:00",
+  "generatedAt": "2026-09-23T13:30:08+00:00",
   "canada": {
-    "population": 41417056,
-    "populationDate": "2026-04-01",
-    "quarterlyGrowthPct": -0.133,
+    "population": 41798407,
+    "populationDate": "2026-07-01",
+    "quarterlyGrowthPct": 0.193,
     "history": [
       {
-        "date": "2023-07-01",
-        "population": 40049088
-      },
-      {
         "date": "2023-10-01",
-        "population": 40467722
+        "population": 40439108
       },
       {
         "date": "2024-01-01",
-        "population": 40724526
+        "population": 40670178
       },
       {
         "date": "2024-04-01",
-        "population": 40990297
+        "population": 40912561
       },
       {
         "date": "2024-07-01",
-        "population": 41262329
+        "population": 41162593
       },
       {
         "date": "2024-10-01",
-        "population": 41494132
+        "population": 41373096
       },
       {
         "date": "2025-01-01",
-        "population": 41574517
+        "population": 41435888
       },
       {
         "date": "2025-04-01",
-        "population": 41604555
+        "population": 41495432
       },
       {
         "date": "2025-07-01",
-        "population": 41651653
+        "population": 41608982
       },
       {
         "date": "2025-10-01",
-        "population": 41575585
+        "population": 41723923
       },
       {
         "date": "2026-01-01",
-        "population": 41472081
+        "population": 41716698
       },
       {
         "date": "2026-04-01",
-        "population": 41417056
+        "population": 41718064
+      },
+      {
+        "date": "2026-07-01",
+        "population": 41798407
       }
     ]
   },
@@ -60,7 +60,7 @@
     "previousYear": 2024,
     "totalPopulation": 31169100,
     "annualGrowthPct": 1.002,
-    "sharePct": 74.833,
+    "sharePct": 74.91,
     "count": 41,
     "top10": [
       {
@@ -137,7 +137,7 @@
   },
   "economy": {
     "policyRate": 2.25,
-    "policyRateDate": "2026-09-07"
+    "policyRateDate": "2026-09-09"
   },
   "sources": {
     "canadaPopulation": "Statistics Canada table 17-10-0009-01 / WDS vector 1",
