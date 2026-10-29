@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T18:52:37+00:00",
+  "generatedAt": "2026-10-29T18:58:25+00:00",
   "canada": {
     "population": 41798407,
     "populationDate": "2026-07-01",
@@ -137,7 +137,7 @@
   },
   "economy": {
     "policyRate": 2.25,
-    "policyRateDate": "2026-10-14"
+    "policyRateDate": "2026-10-15"
   },
   "sources": {
     "canadaPopulation": "Statistics Canada table 17-10-0009-01 / WDS vector 1",
